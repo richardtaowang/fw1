@@ -1,7 +1,7 @@
 component extends="framework.one" {
 
-	this.mappings["/userManagerAJAX"] = getDirectoryFromPath(getCurrentTemplatePath());
-	this.name = 'fw1-userManagerAJAX';
+	this.mappings["/cargoFleetManager"] = getDirectoryFromPath(getCurrentTemplatePath());
+	this.name = 'fw1-cargoFleetManager';
 
 	// FW/1 - configuration:
 	variables.framework = {

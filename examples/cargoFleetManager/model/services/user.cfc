@@ -1,3 +1,5 @@
+// MODELS: Users - database logic
+
 component accessors=true {
 
     variables.users = { };
