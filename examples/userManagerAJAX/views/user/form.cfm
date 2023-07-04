@@ -1,48 +1,53 @@
-<cfset local.user = rc.user>
-<cfset local.depts = rc.departments>
+<cfparam name="form.IMONUMBER" default="">
+<cfparam name="form.VesselName" default="">
+<cfparam name="form.ShipType" default="">
 
-<h3>User Info</h3>
+<h3>Vessel Info</h3>
 
-<cfoutput>
-<form id="userForm" class="familiar medium" method="post" action="index.cfm?action=user.save">
-	
-	<input type="hidden" name="id" value="#local.user.getId()#">
-	
-	<div class="field">
-		<label for="firstName" class="label">First Name:</label>
-		<input type="text" name="firstName" id="firstName" value="#local.user.getFirstName()#">
-	</div>
-	
-	<div class="field">
-		<label for="lastName" class="label">Last Name:</label>
-		<input type="text" name="lastName" id="lastName" value="#local.user.getLastName()#">
-	</div>
-	
-	<div class="field">
-		<label for="email" class="label">Email:</label>
-		<input type="text" name="email" id="email" value="#local.user.getEmail()#">
-	</div>
-	
-	<div class="field">
-		<label for="departmentId" class="label">Department:</label>
-		<select name="departmentId" id="departmentId">
-			<cfloop collection="#local.depts#" item="local.id">
-				
-				<cfset local.dept = local.depts[local.id]>
-				
-				<!--- when editing a user we need to set the dept that user currently has --->
-				<cfif local.id EQ local.user.getDepartmentId()>
-					<option value="#local.id#" selected="selected">#local.dept.getName()#</option>
-				<cfelse>
-					<option value="#local.id#">#local.dept.getName()#</option>
-				</cfif>
-            </cfloop>
-		</select>
-	</div>
-	
-	<div class="control">
-		<input type="submit" value="Save User">
-	</div>
-	
+<form id="userForm" class="familiar medium" method="post" action="#CGI.SCRIPT_NAME#">
+    <div class="field">
+        <label for="IMONUMBER" class="label">IMO NUMBER:</label>
+        <input type="text" name="IMONUMBER" id="IMONUMBER" required>
+    </div>
+
+    <div class="field">
+        <label for="VesselName" class="label">Vessel Name:</label>
+        <input type="text" name="VesselName" id="VesselName" required>
+    </div>
+
+    <div class="field">
+        <label for="ShipType" class="label">Ship Type:</label>
+        <input type="text" name="ShipType" id="ShipType" required>
+    </div>
+
+    <div class="control">
+        <input type="submit" name="submit" value="Save User">
+    </div>
 </form>
-</cfoutput>
+
+<cfif structKeyExists(form, "submit")>
+    <cftry>
+
+        <cfquery datasource="MarineData">
+            INSERT INTO [CSV-DS_USFlag-Fleet_2022_1_16] (IMO_NUMBER, Vessel_Name, Ship_Type)
+            VALUES (
+                <cfqueryparam value="#form.IMONUMBER#" cfsqltype="CF_SQL_INTEGER">,
+                <cfqueryparam value="#form.VesselName#" cfsqltype="CF_SQL_VARCHAR">,
+                <cfqueryparam value="#form.ShipType#" cfsqltype="CF_SQL_VARCHAR">
+            )
+        </cfquery>
+
+        <cfheader statuscode="201" statustext="Created">
+
+        <cfset successMessage = "Data has been successfully inserted.">
+        <cfset response = {
+            "id": newRecordID,
+            "message": "Resource created successfully."
+        }>
+        <cfoutput>#serializeJSON(response)#</cfoutput>
+
+        <cfcatch type="any">
+            <cfset errorMessage = "Error inserting data: #cfcatch.message#">
+        </cfcatch>
+    </cftry>
+</cfif>

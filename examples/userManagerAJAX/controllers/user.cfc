@@ -1,3 +1,4 @@
+// CONTROLLERS: Users
 component accessors=true {
 
     property departmentService;
