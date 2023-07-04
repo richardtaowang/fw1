@@ -53,9 +53,23 @@ component accessors=true {
         return this;
     }
 
-    function delete( string id ) {
-        structDelete( variables.users, id );
+    function delete(id) {
+        var CONSOLE = {};
+        var isSuccess = false;
+        var query = new Query();
+        query.setDatasource("MarineData");
+        query.setSQL("
+            DELETE FROM [CSV-DS_USFlag-Fleet_2022_1_16]
+            WHERE IMO_NUMBER = :id
+        ");
+        query.addParam(name="id", value=id, cfsqltype="cf_sql_integer");
+        var result = query.execute().getResult();
+        if (result.recordCount EQ 1) {
+            isSuccess = true;
+        }
+        return isSuccess;
     }
+
 
     function get( string id ) {
         var result = "";

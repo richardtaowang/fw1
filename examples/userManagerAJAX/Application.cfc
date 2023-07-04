@@ -1,6 +1,6 @@
 component extends="framework.one" {
 
-	this.mappings["/cargoFleetManager"] = getDirectoryFromPath(getCurrentTemplatePath());
+	this.mappings["/userManagerAJAX"] = getDirectoryFromPath(getCurrentTemplatePath());
 	this.name = 'fw1-cargoFleetManager';
 
 	// FW/1 - configuration:
