@@ -54,7 +54,6 @@ component accessors=true {
     }
 
     function delete(id) {
-        var CONSOLE = {};
         var isSuccess = false;
         var query = new Query();
         query.setDatasource("MarineData");

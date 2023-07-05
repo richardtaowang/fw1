@@ -21,7 +21,7 @@
 			<th>VTA</th>
 			<th>Jones Act Eligible</th>
 			<th>Militarily Useful</th>
-			<!--- <th>Delete</th> --->
+			<th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -42,6 +42,7 @@
 					<td>#myQuery.VTA#</td>
 					<td>#myQuery.Jones_Act_Eligible#</td>
 					<td>#myQuery.Militarily_Useful#</td>
+					<td><a href="index.cfm?action=user.delete&id=#myQuery.IMO_NUMBER#">DELETE</a></td>
 				</tr>
 			</cfoutput>
 		</cfif>
