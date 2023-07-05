@@ -16,8 +16,10 @@
 
 	<ul class="nav horizontal clear">
 		<li><a href="index.cfm">Home</a></li>
-		<li><a href="index.cfm?action=user.list" title="View the list of users">Vessels</a></li>
-		<li><a href="index.cfm?action=user.form" title="Fill out form to add new user">Add Vessel</a></li>
+		<li><a href="index.cfm?action=user.list" title="View the list of vessels">Vessels</a></li>
+		<li><a href="index.cfm?action=user.form" title="See Vessel Data Visualizers">Vessel Resources</a></li>
+		<li><a href="index.cfm?action=user.list" title="View data for Cargo Theft">Cargo Theft</a></li>
+		<li><a href="index.cfm?action=user.cargoData" title="See Cargo Theft Data Visualizers">Cargo Theft Resources</a></li>
 		<li><a href="index.cfm?reload=true" title="Resets framework cache">Reload</a></li>
 	</ul>
 
